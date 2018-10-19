@@ -222,7 +222,7 @@ class ProductController extends Controller
             $pedido->estado = 0;
             $pedido->cantidad = 0;
             $pedido->total = 0;
-            $pedido->save();
+            //$pedido->save();
             
         }
         
