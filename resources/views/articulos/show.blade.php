@@ -23,8 +23,8 @@
 <br />
 <h2 class="px-lg-2 py-4">{{ $articulo->name }}</h2>
 <p  class="px-lg-2"><strong> Precio:</strong> ${{ $articulo->precio }}</p>
-<p  class="px-lg-2"><strong> Material:</strong> {{ $articulo->material->name }}</p>
-<p  class="px-lg-2"><strong> Color:</strong> {{ $articulo->color->name }}</p>
+<p  class="px-lg-2"><strong> Material:</strong> {{ $articulo->caracteristicaarticulo()->where('idt', 2)->first()->caracteristica->name }}</p>
+<p  class="px-lg-2"><strong> Color:</strong> {{ $articulo->caracteristicaarticulo()->where('idt', 1)->first()->caracteristica->name }}</p>
 </div>
 
 </div>

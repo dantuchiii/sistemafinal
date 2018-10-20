@@ -45,7 +45,7 @@
                 <div class="col-md-3">
                 <label for="color" class="control-label">Color</label>
                 <select name="color" id="color">
-                    @foreach($caracteristicasmc as $col)
+                    @foreach($caracteristicasc as $col)
                         <option value="{{ $col->id }}">{{ $col->name }}</option>
                     @endforeach
                 </select>   

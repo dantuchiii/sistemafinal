@@ -15,6 +15,7 @@ class CreateCaracteristicaArticulosTable extends Migration
     {
         Schema::create('caracteristica_articulos', function (Blueprint $table) {
             $table->increments('id');
+            $table->integer('idt');
             $table->timestamps();
             
             $table->integer('articulos_id')->unsigned();

@@ -85,6 +85,7 @@
                     iconClass: getOptions().iconClasses.success,
                     message: message,
                     optionsOverride: optionsOverride,
+                    
                     title: title
                 });
             }
@@ -95,7 +96,9 @@
                     iconClass: getOptions().iconClasses.warning,
                     message: message,
                     optionsOverride: optionsOverride,
+
                     title: title
+
                 });
             }
 

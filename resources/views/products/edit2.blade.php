@@ -32,7 +32,7 @@
             
              <div class="form-group">
                 <label for="categoria" class="control-label">Categoria</label>
-                <select name="category" id="category">
+                <select name="category" class="form-control" id="category">
                     @foreach($categorias as $cat)
                         @if($product->categoria->id == $cat->id)
                         <option value="{{$cat->id}}" selected="true">{{ $cat->name }}</option>
@@ -86,14 +86,20 @@
                 @endif                        
             </div>
             
-            <button type="submit" class="btn btn-primary col-2">Guardar</button> 
+             </div>
             
-            <a href="{{ route('Products.show', $product->id) }}" class="btn btn-warning col-2 ml-3">Cancelar</a> 
+            <a href="{{ route('Products.show', $product->id) }}" class="btn btn-danger col-2 ml-3">Cancelar</a> 
+
+            <button type="submit" class="btn btn-primary col-2 ml-3">Guardar</button>  
             
             
             
             </form>
             
-            </div>
+           
+
+            <div class="row">
+        <br />
+        </div>
  
  @endsection  

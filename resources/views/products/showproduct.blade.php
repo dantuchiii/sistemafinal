@@ -40,8 +40,20 @@
             <td style="vertical-align: middle;">{{ $art->id }}</td>
             <td><img src="{{ URL::to('/image/'. $art->imagen)  }}" width="50px" height="50px"> {{ $art->name }}</td>
             <td style="vertical-align: middle;">${{ $art->precio }}</td>
-            <td style="vertical-align: middle;">{{ $art->caracteristicaarticulo()->get() }}</td>
-            <td style="vertical-align: middle;">{{ $art->caracteristicaarticulo()->get() }}</td>
+            <td style="vertical-align: middle;">
+                @foreach($art->caracteristicaarticulo()->get() as $artcar)
+                    @if($artcar->idt == 1)    
+                        {{ $artcar->caracteristica->name }}
+                    @endif
+                @endforeach
+            </td>
+            <td style="vertical-align: middle;">
+                @foreach($art->caracteristicaarticulo()->get() as $artcar)
+                    @if($artcar->idt == 2)    
+                        {{ $artcar->caracteristica->name }}
+                    @endif
+                @endforeach
+            </td>
             <td style="vertical-align: middle;">
                 <a class="btn btn-info " href="{{ route('Articulos.show', $art->id) }}"><i class="far fa-eye"></i> Ver</a>
             </td>

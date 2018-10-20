@@ -82,13 +82,29 @@
     
     
     @if(session()->has('info'))
-        <script> toastr.info("{{ session('info') }}") </script>
+        <script> 
+        toastr.options.closeButton = true;
+        toastr.options.positionClass = "toast-top-center";
+        toastr.options.newestOnTop = true;
+        toastr.info("{{ session('info') }}") 
+        </script>
     @elseif(session()->has('success'))
-        <script> toastr.success("{{ session('success') }}") </script>
+        <script>
+        toastr.options.closeButton = true; 
+        toastr.options.positionClass = "toast-top-center";
+        toastr.options.newestOnTop = true;
+        toastr.success("{{ session('success') }}") 
+        </script>
     @elseif(session()->has('error'))
-        <script> toastr.error("{{ session('error') }}") </script>
+        <script> 
+        toastr.options.closeButton = true;
+        toastr.error("{{ session('error') }}") 
+        </script>
     @elseif(session()->has('warning'))
-        <script> toastr.warning("{{ session('warning') }}") </script>   
+        <script> 
+        toastr.options.closeButton = true;    
+        toastr.warning("{{ session('warning') }}") 
+        </script>   
     @endif                 
     
   </body>

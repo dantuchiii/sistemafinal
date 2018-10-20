@@ -7,6 +7,8 @@ use App\color;
 use App\Material;
 use App\articulos;
 use App\Product;
+use App\caracteristica;
+use App\CaracteristicaArticulo;
 use File;
 
 
@@ -19,13 +21,19 @@ class ArticulosController extends Controller
         $product = Product::find($id);
         $mat = caracteristica::find($request->material);
         $col = caracteristica::find($request->color);
-        
+        $carart = new CaracteristicaArticulo;
+        $carart2 = new CaracteristicaArticulo;
         
         
         $articulo->name = $request->name2;
         $articulo->precio = $request->precio;
-        $articulo->caracteristicaarticulo()->associate($col); 
-        $articulo->caracteristicaarticulo()->associate($mat);
+
+        $carart->caracteristica()->associate($mat);
+        $carart->idt = 2;
+        $carart2->caracteristica()->associate($col);
+        $carart2->idt = 1;
+
+        
         $articulo->original = false;
         
         $img = $request->file('imagen');
@@ -38,21 +46,25 @@ class ArticulosController extends Controller
         $articulo->producto()->associate($product);
         
         $articulo->save();
+
+        $carart->articulo()->associate($articulo);
+        $carart2->articulo()->associate($articulo);
+        $carart->save();
+        $carart2->save();
         
-        return view('products.showproduct', compact('product'));
-        
+        //return view('products.showproduct', compact('product'));
+        return redirect()->route('Products.show', $articulo->producto->id)->with('success','El diseño se ha agregado');
     }
     
     
     public function create($id)
     {
         $idp = $id;
-        $materiales = Material::all();
-        $colores = color::all();
+        
         $caracteristicasc = caracteristica::where('caracteristicatipo_id','=', 1)->get();
         $caracteristicasm = caracteristica::where('caracteristicatipo_id','=', 2)->get();
                 
-        return view('articulos.createarticulo', compact('materiales','colores','idp','caracteristicasc','caracteristicasm'));
+        return view('articulos.createarticulo', compact('idp','caracteristicasc','caracteristicasm'));
         
     }
     
@@ -69,11 +81,10 @@ class ArticulosController extends Controller
     public function edit($id)
     {
         $articulo = articulos::find($id);
-        $materiales = Material::all();
-        $colores = color::all();
+       
         $caracteristicasc = caracteristica::where('caracteristicatipo_id','=', 1)->get();
         $caracteristicasm = caracteristica::where('caracteristicatipo_id','=', 2)->get();
-        return view('articulos.editarticulo', compact('articulo', 'materiales','colores','caracteristicasc','caracteristicasm'));
+        return view('articulos.editarticulo', compact('articulo','caracteristicasc','caracteristicasm'));
         
     }
 
@@ -82,13 +93,17 @@ class ArticulosController extends Controller
         $articulo = articulos::find($id);
         $mat = caracteristica::find($request->material);
         $col = caracteristica::find($request->color);
-        
+        $carart = new CaracteristicaArticulo;
+        $carart2 = new CaracteristicaArticulo;
+
         
         
         $articulo->name = $request->name2;
         $articulo->precio = $request->precio;
-        $articulo->caracteristicaarticulo()->associate($col); 
-        $articulo->caracteristicaarticulo()->associate($mat);
+        $carart->caracteristica()->associate($mat);
+        $carart->idt = 2;
+        $carart2->caracteristica()->associate($col);
+        $carart2->idt = 1;
         //$articulo->original = false;
         
         $img = $request->file('imagen');
@@ -103,6 +118,11 @@ class ArticulosController extends Controller
         
         
         $articulo->save();
+
+        $carart->articulo()->associate($articulo);
+        $carart2->articulo()->associate($articulo);
+        $carart->save();
+        $carart2->save();
         
         return view('Articulos.show', compact('articulo'));
         

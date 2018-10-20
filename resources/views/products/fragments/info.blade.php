@@ -1,4 +1,4 @@
-@if(Session::has('info'))
+<!--@if(Session::has('info'))
     <div class="alert alert-info">
         <button type="button" class="close" data-dismiss="alert">
             &times;
@@ -7,4 +7,4 @@
     </div>
     
 
-@endif
+@endif -->

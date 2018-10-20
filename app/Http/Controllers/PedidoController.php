@@ -109,7 +109,7 @@ class PedidoController extends Controller
         
               
         
-        return redirect()->route('Pedido.index2')->with('info','Nuevo pedido realizado');
+        return redirect()->route('Pedido.index2')->with('success','Nuevo pedido realizado');
         
         
         

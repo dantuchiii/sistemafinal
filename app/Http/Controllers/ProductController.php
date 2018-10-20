@@ -55,7 +55,7 @@ class ProductController extends Controller
         $product->delete();
         
         
-        return back()->with('info', 'El producto fue eliminado');
+        return back()->with('success', 'El producto fue eliminado');
     }
     
     
@@ -99,8 +99,10 @@ class ProductController extends Controller
         $articulo->precio = $request->precio;
        
         $carart->caracteristica()->associate($mat);
+        $carart->idt = 2;
         $carart2->caracteristica()->associate($col);
-        
+        $carart2->idt = 1;
+
         $articulo->original = true;
                 
         $product->name = $request->name;
@@ -171,7 +173,7 @@ class ProductController extends Controller
                
         $product->save();
         
-        return redirect()->route('Products.index')->with('info','El producto se ha modificado');
+        return redirect()->route('Products.index')->with('success','El producto se ha modificado');
     }
     
     
@@ -222,7 +224,7 @@ class ProductController extends Controller
             $pedido->estado = 0;
             $pedido->cantidad = 0;
             $pedido->total = 0;
-            //$pedido->save();
+            $pedido->save();
             
         }
         
@@ -241,7 +243,7 @@ class ProductController extends Controller
                 $deti->save();
                 $pedido->save();
                               
-                return redirect()->route('Product.showcatalog', ['id' => $articulo->id])->with('info', 'Producto agregado al carro');
+                return redirect()->route('Product.showcatalog', ['id' => $articulo->id])->with('success', 'Producto agregado al carro');
                 
             }
             
@@ -266,7 +268,7 @@ class ProductController extends Controller
             return redirect()->route('Product.showcatalog', ['id' => $articulo->id])->with('info', 'Tienes que iniciar sesion primero');
         }
         
-        return redirect()->route('Product.showcatalog', ['id' => $articulo->id])->with('info', 'Producto agregado al carro');
+        return redirect()->route('Product.showcatalog', ['id' => $articulo->id])->with('success', 'Producto agregado al carro');
         
         
     }

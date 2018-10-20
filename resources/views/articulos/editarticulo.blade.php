@@ -37,8 +37,8 @@
                 <div class="col-md-3">
                 <label for="material" class="control-label">Material</label>
                 <select name="material" id="material">
-                    @foreach($materiales as $mat)
-                        @if($mat->id == $articulo->material->id)
+                    @foreach($caracteristicasm as $mat)
+                        @if($mat->id == $articulo->caracteristicaarticulo()->where('idt',2)->first()->caracteristica->id)
                         <option value="{{ $mat->id }}" selected="true">{{ $mat->name }}</option>
                         @else
                         <option value="{{ $mat->id }}">{{ $mat->name }}</option>
@@ -50,8 +50,8 @@
                 <div class="col-md-3">
                 <label for="color" class="control-label">Color</label>
                 <select name="color" id="color">
-                    @foreach($colores as $col)
-                        @if($col->id == $articulo->color->id)
+                    @foreach($caracteristicasc as $col)
+                        @if($col->id == $articulo->caracteristicaarticulo()->where('idt',1)->first()->caracteristica->id)
                         <option value="{{ $col->id }}" selected="true">{{ $col->name }}</option>
                         @else
                         <option value="{{ $col->id }}">{{ $col->name }}</option>
