@@ -10,12 +10,24 @@ use App\Product;
 use App\caracteristica;
 use App\CaracteristicaArticulo;
 use File;
+use DB;
 
 
 class ArticulosController extends Controller
 {
     
     public function store(Request $request, $id){
+
+
+
+        $this->validate($request, [
+        'name2' => 'required|max:2',
+        
+
+        ]);
+
+
+
               
         $articulo = new articulos;
         $product = Product::find($id);
@@ -91,6 +103,17 @@ class ArticulosController extends Controller
     public function update(Request $request, $id){
               
         $articulo = articulos::find($id);
+
+        $mat = $articulo->caracteristicaarticulo()->where('idt', 2)->first();
+        $col = $articulo->caracteristicaarticulo()->where('idt', 1)->first();
+
+        $mat->articulo()->dissociate($articulo);
+        $col->articulo()->dissociate($articulo);
+
+        DB::table('caracteristica_articulos')->where('id', '=', $mat->id)->delete();
+        DB::table('caracteristica_articulos')->where('id', '=', $col->id)->delete();
+        
+
         $mat = caracteristica::find($request->material);
         $col = caracteristica::find($request->color);
         $carart = new CaracteristicaArticulo;
