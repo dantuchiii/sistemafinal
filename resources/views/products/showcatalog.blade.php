@@ -2,6 +2,9 @@
 
 @section('content')
 @include('products.fragments.info')
+
+
+
 <div class="col-md-12">
 <h2>Descripción del Producto <a href="{{ route('Products.catalog') }}" class="btn btn-info float-right">Volver</a> </h2>
 <hr />
@@ -19,6 +22,7 @@
 <div class="container px-lg-5">
 
 <label class="control-label">Diseño</label>
+
 <select class="form-control" name="art" id="select-art" >
     @foreach($articulo->producto->articulos()->get() as $art)
         @if($art->id == $articulo->id)
@@ -28,6 +32,8 @@
         @endif
     @endforeach
 </select>
+
+<input type="text" name="categ" id="categ" class="form-control" autocomplete="off" >
 
 </div>
 <div class="container px-lg-5">
@@ -59,7 +65,34 @@
 
 
 
+<script src="{{ asset('js/jquery.typeahead.js')}}"></script>
 
+
+<script>
+    $(document).ready(function(){
+        var asd = $('#categ').val();
+        $('#categ').typeahead({
+            source: function(query, result)
+            {
+                $.ajax({
+                    url:"/sistemafinal/public/laurlquevosquieras/" + asd,
+                    method: "POST",
+                    data:{query:query},
+                    dataType:"json",
+                    success:function(data){
+
+                        result($.map(data, function(item){
+
+                            return item;
+                        }));
+                    }
+                })
+            }
+
+        })
+
+    })   
+</script>
 
 
 @endsection

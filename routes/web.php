@@ -59,7 +59,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('changeart/{id}','ArticulosController@byArticulo');
 
-
+Route::post('laurlquevosquieras/{art}', 'ArticulosController@typeaheadart');
 
 
 

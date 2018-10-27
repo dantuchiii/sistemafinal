@@ -18,17 +18,12 @@ class ArticulosController extends Controller
     
     public function store(Request $request, $id){
 
-
-
         $this->validate($request, [
         'name2' => 'required|max:2',
         
 
         ]);
-
-
-
-              
+             
         $articulo = new articulos;
         $product = Product::find($id);
         $mat = caracteristica::find($request->material);
@@ -158,7 +153,20 @@ class ArticulosController extends Controller
         return $articulo;
     }
 
-    
+    public function typeaheadart(Request $request, $art){
+        if($request->ajax()){
+
+            $articulo = articulos::where('name','LIKE', '%'.$art.'%')->get();
+
+            if($articulo->isNotEmpty()){
+                return response()->json('articulos' => $articulo);
+            }
+        }
+
+    }
+
+
+
 }
 
 

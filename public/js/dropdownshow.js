@@ -16,7 +16,7 @@ function onChangeInputisito(){
     
     var inputisin = document.getElementById("inputisito");
     
-    if(inputisin.value < 0){
+    if(inputisin.value < 1){
         
         inputisin.value = 1;
     };
